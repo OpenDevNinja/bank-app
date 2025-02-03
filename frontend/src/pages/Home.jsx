@@ -1,110 +1,163 @@
+import React, { useState, useEffect } from 'react'
+import { motion, AnimatePresence } from 'framer-motion'
 import { useNavigate } from 'react-router-dom'
 import { useAuth } from '../hooks/useAuth'
-import { Shield, CreditCard, ArrowRight, Landmark, Lock, Users } from 'lucide-react'
+import { 
+  CreditCard, Landmark, Lock, ArrowRight, ShieldCheck, 
+  Wallet, TrendingUp, PhoneCall, HeartHandshake 
+} from 'lucide-react'
+import HomeCarousel from '../components/HomeCarousel'
 
 const Home = () => {
   const navigate = useNavigate()
   const { user } = useAuth()
+  const [currentSlide, setCurrentSlide] = useState(0)
 
-  const features = [
+  const heroSlides = [
     {
-      icon: <CreditCard className="w-8 h-8 text-primary-500" />,
-      title: 'Gestion de Compte',
-      description: 'Créez et gérez facilement vos comptes bancaires en ligne'
+      image: "https://illustrations.undraw.co/money-house",
+      title: "Votre Finances, Votre Liberté",
+      subtitle: "Gérez vos comptes avec élégance et simplicité"
     },
     {
-      icon: <Landmark className="w-8 h-8 text-primary-500" />,
-      title: 'Transactions Sécurisées',
-      description: 'Effectuez des dépôts et retraits en toute sécurité'
+      image: "https://illustrations.undraw.co/digital-banking",
+      title: "Bancaire 100% Mobile",
+      subtitle: "Vos services bancaires dans votre poche"
     },
     {
-      icon: <Lock className="w-8 h-8 text-primary-500" />,
-      title: 'Protection Maximale',
-      description: 'Vos données sont protégées avec les dernières technologies de sécurité'
+      image: "https://illustrations.undraw.co/financial-data",
+      title: "Sécurité Maximale",
+      subtitle: "Protection de vos données en temps réel"
     }
   ]
 
+  const features = [
+    {
+      icon: <CreditCard className="w-8 h-8 text-white" />,
+      title: 'Gestion de Compte',
+      description: 'Contrôle total de vos finances numériques'
+    },
+    {
+      icon: <ShieldCheck className="w-8 h-8 text-white" />,
+      title: 'Transactions Sécurisées',
+      description: 'Protocoles de sécurité de dernière génération'
+    },
+    {
+      icon: <TrendingUp className="w-8 h-8 text-white" />,
+      title: 'Investissements',
+      description: 'Opportunités d\'investissement personnalisées'
+    }
+  ]
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentSlide((prev) => (prev + 1) % heroSlides.length)
+    }, 5000)
+    return () => clearInterval(interval)
+  }, [])
+
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-dark-bg">
+    <motion.div 
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.5 }}
+      className="min-h-screen bg-gradient-to-br from-blue-50 to-blue-100 dark:from-dark-bg dark:to-dark-bg"
+    >
       {/* Hero Section */}
-      <div className="relative bg-white dark:bg-dark-card overflow-hidden">
-        <div className="max-w-7xl mx-auto">
-          <div className="relative z-10 pb-8 bg-white dark:bg-dark-card sm:pb-16 md:pb-20 lg:max-w-2xl lg:w-full lg:pb-28 xl:pb-32">
-            <main className="mt-10 mx-auto max-w-7xl px-4 sm:mt-12 sm:px-6 md:mt-16 lg:mt-20 lg:px-8 xl:mt-28">
-              <div className="sm:text-center lg:text-left">
-                <h1 className="text-4xl tracking-tight font-extrabold text-gray-900 dark:text-white sm:text-5xl md:text-6xl">
-                  <span className="block">Votre banque</span>
-                  <span className="block text-primary-600">100% en ligne</span>
-                </h1>
-                <p className="mt-3 text-base text-gray-500 dark:text-gray-400 sm:mt-5 sm:text-lg sm:max-w-xl sm:mx-auto md:mt-5 md:text-xl lg:mx-0">
-                  Gérez vos comptes bancaires en toute simplicité. Effectuez vos opérations
-                  en quelques clics, où que vous soyez.
-                </p>
-                <div className="mt-5 sm:mt-8 sm:flex sm:justify-center lg:justify-start">
-                  <div className="rounded-md shadow">
-                    <button
-                      onClick={() => navigate(user ? '/dashboard' : '/register')}
-                      className="w-full flex items-center justify-center px-8 py-3 
-                               border border-transparent text-base font-medium rounded-md 
-                               text-white bg-primary-600 hover:bg-primary-700 md:py-4 
-                               md:text-lg md:px-10"
-                    >
-                      {user ? 'Accéder à mon compte' : 'Créer un compte'}
-                    </button>
-                  </div>
-                  <div className="mt-3 sm:mt-0 sm:ml-3">
-                    <button
-                      onClick={() => navigate(user ? '/dashboard' : '/login')}
-                      className="w-full flex items-center justify-center px-8 py-3 
-                               border border-transparent text-base font-medium rounded-md 
-                               text-primary-700 bg-primary-100 hover:bg-primary-200 
-                               md:py-4 md:text-lg md:px-10"
-                    >
-                      {user ? 'Tableau de bord' : 'Se connecter'}
-                    </button>
-                  </div>
-                </div>
-              </div>
-            </main>
+      <div className="grid lg:grid-cols-2 min-h-screen items-center max-w-7xl mx-auto px-4 py-16 sm:px-6 lg:px-8">
+        {/* Left Content */}
+        <motion.div 
+          initial={{ opacity: 0, x: -50 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.8 }}
+          className="space-y-6 lg:pr-12"
+        >
+          <h1 className="text-4xl tracking-tight font-extrabold text-gray-900 dark:text-white sm:text-5xl md:text-6xl">
+            <span className="block">Votre Banque</span>
+            <span className="block text-primary-600">Numérique Moderne</span>
+          </h1>
+          
+          <p className="text-xl text-gray-600 dark:text-gray-300">
+            Une expérience bancaire fluide, sécurisée et intuitive. 
+            Gérez vos finances avec une simplicité révolutionnaire.
+          </p>
+          
+          <div className="flex space-x-4">
+            <motion.button
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              onClick={() => navigate(user ? '/dashboard' : '/register')}
+              className="flex items-center justify-center px-8 py-3 
+                         text-white bg-primary-600 rounded-xl 
+                         shadow-lg hover:shadow-xl transition-all"
+            >
+              {user ? 'Mon Tableau de Bord' : 'Créer un Compte'}
+              <ArrowRight className="ml-2" />
+            </motion.button>
+            
+            <motion.button
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              onClick={() => navigate('/login')}
+              className="flex items-center justify-center px-8 py-3 
+                         text-primary-600 bg-primary-100 rounded-xl 
+                         hover:bg-primary-200 transition-all"
+            >
+              Se connecter
+              <ArrowRight className="ml-2" />
+            </motion.button>
           </div>
-        </div>
+        </motion.div>
+
+        {/* Right Carousel */}
+        <motion.div 
+          initial={{ opacity: 0, x: 50 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.8 }}
+          className="relative flex items-center justify-center"
+        >
+          <AnimatePresence mode="wait">
+          <HomeCarousel />
+          </AnimatePresence>
+        </motion.div>
       </div>
 
       {/* Features Section */}
-      <div className="py-12 bg-white dark:bg-dark-card">
+      <div className="bg-white dark:bg-dark-card py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="lg:text-center">
-            <h2 className="text-base text-primary-600 font-semibold tracking-wide uppercase">
-              Fonctionnalités
+          <div className="text-center mb-12">
+            <h2 className="text-3xl font-extrabold text-gray-900 dark:text-white">
+              Nos Fonctionnalités Principales
             </h2>
-            <p className="mt-2 text-3xl leading-8 font-extrabold tracking-tight 
-                         text-gray-900 dark:text-white sm:text-4xl">
-              Une meilleure façon de gérer votre argent
+            <p className="mt-4 text-xl text-gray-600 dark:text-gray-300">
+              Découvrez les innovations qui transforment votre expérience bancaire
             </p>
           </div>
 
-          <div className="mt-10">
-            <div className="grid grid-cols-1 gap-10 sm:grid-cols-2 lg:grid-cols-3">
-              {features.map((feature, index) => (
-                <div key={index} className="relative">
-                  <div className="absolute flex items-center justify-center h-12 w-12 
-                                rounded-md bg-primary-500 text-white">
-                    {feature.icon}
-                  </div>
-                  <p className="ml-16 text-lg leading-6 font-medium 
-                               text-gray-900 dark:text-white">
-                    {feature.title}
-                  </p>
-                  <dd className="mt-2 ml-16 text-base text-gray-500 dark:text-gray-400">
-                    {feature.description}
-                  </dd>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {features.map((feature, index) => (
+              <motion.div
+                key={index}
+                whileHover={{ scale: 1.05 }}
+                className="bg-primary-100 dark:bg-dark-bg p-6 rounded-xl 
+                           flex flex-col items-center text-center 
+                           transform transition-all hover:shadow-xl"
+              >
+                <div className="bg-primary-500 p-4 rounded-full mb-4">
+                  {feature.icon}
                 </div>
-              ))}
-            </div>
+                <h3 className="text-xl font-bold mb-2 text-gray-900 dark:text-white">
+                  {feature.title}
+                </h3>
+                <p className="text-gray-600 dark:text-gray-300">
+                  {feature.description}
+                </p>
+              </motion.div>
+            ))}
           </div>
         </div>
       </div>
-    </div>
+    </motion.div>
   )
 }
 
