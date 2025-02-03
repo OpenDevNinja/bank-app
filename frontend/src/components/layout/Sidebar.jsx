@@ -10,7 +10,8 @@ import {
   Settings, 
   LogOut,
   X, 
-  UserCircle
+  UserCircle,
+  WalletIcon
 } from 'lucide-react';
 import { useAuth } from '../../hooks/useAuth';
 
@@ -30,8 +31,10 @@ const Sidebar = ({ isOpen, onClose }) => {
     { icon: Home, label: 'Administration', path: 'admin/dashboard' },
     { icon: Users, label: 'Utilisateurs', path: '/admin/users' },
     { icon: Wallet, label: 'Comptes', path: '/admin/accounts' },
+    { icon: WalletIcon, label: 'Comptes désactivés', path: '/admin/deactivated' },
     { icon: History, label: 'Transactions', path: '/admin/transactions' },
     { icon: Settings, label: 'Paramètres', path: '/admin/settings' },
+   
   ];
 
   const menuItems = user?.role === 'admin' ? adminMenuItems : clientMenuItems;

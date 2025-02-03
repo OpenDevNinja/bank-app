@@ -15,7 +15,7 @@ router.patch('/:id/deactivate',
     adminController.deactivateAccount
 );
 
-router.get('/deactivate-accounts',
+router.get('/deactivated',
     auth,
     isAdmin,
     adminController.getDeactivatedAccounts);

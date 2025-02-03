@@ -1,5 +1,5 @@
 import React from 'react';
-import { Home, Wallet, History, UserCircle, LogOut, Settings } from 'lucide-react';
+import { Home, Wallet, History, UserCircle, LogOut, Settings, WalletIcon } from 'lucide-react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { useAuth } from '../../hooks/useAuth';
 
@@ -34,6 +34,7 @@ const MobileNavigation = ({ userRole }) => {
     { icon: History, label: 'Transactions', path: '/admin/transactions' },
     { icon: UserCircle, label: 'Utilisateurs', path: '/admin/users' },
     { icon: Settings, label: 'Paramètres', path: '/admin/settings' },
+    { icon: WalletIcon, label: 'Comptes désactivés', path: '/admin/deactivated' },
     { icon: LogOut, label: 'Déconnexion', path: '/logout', isLogout: true }
   ];
 

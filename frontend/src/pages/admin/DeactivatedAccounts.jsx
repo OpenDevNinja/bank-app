@@ -1,7 +1,8 @@
 import { useState, useEffect } from 'react'
 
 import { RefreshCw, AlertCircle } from 'lucide-react'
-import { accountService } from '../../services/account'
+
+import { adminService } from '../../services/admin'
 
 const DeactivatedAccounts = () => {
   const [accounts, setAccounts] = useState([])
@@ -10,7 +11,8 @@ const DeactivatedAccounts = () => {
 
   const fetchDeactivatedAccounts = async () => {
     try {
-      const data = await accountService.getDeactivatedAccounts()
+      const data = await adminService.getDeactivatedAccounts()
+      console.log(data)
       setAccounts(data)
     } catch (err) {
       setError('Erreur lors du chargement des comptes désactivés')
@@ -25,7 +27,7 @@ const DeactivatedAccounts = () => {
 
   const handleReactivate = async (accountId) => {
     try {
-      await accountService.reactivateAccount(accountId)
+      await adminService.reactivateAccount(accountId)
       await fetchDeactivatedAccounts()
     } catch (err) {
       setError('Erreur lors de la réactivation du compte')

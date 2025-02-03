@@ -83,6 +83,8 @@ const App = () => {
                 <Route path="/admin/transactions/" element={<TransactionManagement />} />
                 <Route path="/admin/settings" element={<Settings />} />
                 
+                
+                
 
               </Route>
             </Route>

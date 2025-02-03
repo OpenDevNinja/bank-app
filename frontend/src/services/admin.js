@@ -16,7 +16,7 @@ export const adminService = {
   },
 
   getDeactivatedAccounts: async () => {
-    return await api.get('/admin/deactivated-accounts')
+    return await api.get('/admin/deactivated')
   },
 
   // Gestion des utilisateurs
